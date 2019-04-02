@@ -19,11 +19,21 @@ Character::Character()
 	m_id = 0;
 	m_name = "Timothy";
 
-	m_attributes = {3, 5, 3, 9, 7, 4, 8, 6, 4};
-	m_buffs 	 = {2, 2, 2, 0, 0, 1, 0, 1, 0};
-	m_debuffs 	 = {0, 0, 0, 1, 0, 0, 1, 0, 0};
-
-	m_personality = { 4, 8, 2, 3 };
+	m_attributes =
+	{
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal()
+	};
+	
+	m_buffs 	= {0, 0, 0, 0, 0, 0, 0, 0, 0};
+	m_debuffs 	= {0, 0, 0, 0, 0, 0, 0, 0, 0};
 }
 
 Character::Character(const Character &ccp)
@@ -85,8 +95,62 @@ void Character::printStats() const
 			  << attrs.at(Attributes::FATE) << std::endl
   			  << "\t================================" << std::endl
 			  << "\tPersonality" << std::endl
-			  << "\t--------------------------------" << std::endl
-			  << std::endl;
+			  << "\t--------------------------------" << std::endl;
+
+	if (m_empathy.id() != Empathy::TierId::NEUTRAL)
+	{
+		std::cout << "\t ->  " << m_empathy.tag()
+				  << " (" << m_empathy.val() << ")" << std::endl;
+	}
+
+	if (m_virtue.id() != Virtue::TierId::NEUTRAL)
+	{
+		std::cout << "\t ->  " << m_virtue.tag()
+				  << " (" << m_virtue.val() << ")" << std::endl;
+	}
+
+	if (m_caution.id() != Caution::TierId::NEUTRAL)
+	{
+		std::cout << "\t ->  " << m_caution.tag()
+				  << " (" << m_caution.val() << ")" << std::endl;
+	}
+
+	if (m_honesty.id() != Honesty::TierId::NEUTRAL)
+	{
+		std::cout << "\t ->  " << m_honesty.tag()
+				  << " (" << m_honesty.val() << ")" << std::endl;
+	}
+
+	if (m_greed.id() != Greed::TierId::NEUTRAL)
+	{
+		std::cout << "\t ->  " << m_greed.tag()
+				  << " (" << m_greed.val() << ")" << std::endl;
+	}
+
+	if (m_piety.id() != Piety::TierId::NEUTRAL)
+	{
+		std::cout << "\t ->  " << m_piety.tag()
+				  << " (" << m_piety.val() << ")" << std::endl;
+	}
+
+	std::cout  << "\t================================" << std::endl
+	  		   << "\tOddities" << std::endl
+	  		   << "\t--------------------------------" << std::endl;
+	if (m_oddities.hasAnyOddity())
+	{
+		for (int i = 0; i < Oddities::OddityFlags::SIZE; i++)
+		{
+			if (m_oddities.hasOddity(i))
+			{
+				std::cout << "\t -> " << Oddities::oddityName(i) << std::endl;
+			}
+		}
+	}
+	else
+	{
+		std::cout << "\t  (None)" << std::endl;
+	}
+	std::cout << "\t================================" << std::endl << std::endl;
 }
 
 /*---------------------------------------------------------------------------
@@ -139,12 +203,72 @@ const std::vector<int>& Character::debuffs() const
 	return m_debuffs;
 }
 
-void Character::setPersonality(const std::vector<int>& personality)
+void Character::setEmpathy(const Empathy& empathy)
 {
-	m_personality = personality;
+	m_empathy = empathy;
 }
 
-const std::vector<int>& Character::personality() const
+const Empathy& Character::empathy() const
 {
-	return m_personality;
+	return m_empathy;
+}
+
+void Character::setVirtue(const Virtue& virtue)
+{
+	m_virtue = virtue;
+}
+
+const Virtue& Character::virtue() const
+{
+	return m_virtue;
+}
+
+void Character::setCaution(const Caution& caution)
+{
+	m_caution = caution;
+}
+
+const Caution& Character::caution() const
+{
+	return m_caution;
+}
+
+void Character::setHonesty(const Honesty& honesty)
+{
+	m_honesty = honesty;
+}
+
+const Honesty& Character::honesty() const
+{
+	return m_honesty;
+}
+
+void Character::setGreed(const Greed& greed)
+{
+	m_greed = greed;
+}
+
+const Greed& Character::greed() const
+{
+	return m_greed;
+}
+
+void Character::setPiety(const Piety& piety)
+{
+	m_piety = piety;
+}
+
+const Piety& Character::piety() const
+{
+	return m_piety;
+}
+
+void Character::setOddities(const Oddities& oddities)
+{
+	m_oddities = oddities;
+}
+
+const Oddities& Character::oddities() const
+{
+	return m_oddities;
 }

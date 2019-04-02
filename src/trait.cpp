@@ -100,9 +100,9 @@ int Trait::val() const
  * --------------------------------------------------------------------------
  */
 
-void Oddities::set(uint32_t data)
+Oddities::Oddities()
 {
-	m_data = data;
+	toggleOddity(LinRandom::getInstance()->getOddityVal());
 }
 
 uint32_t Oddities::data() const
@@ -112,14 +112,29 @@ uint32_t Oddities::data() const
 
 void Oddities::toggleOddity(int bit)
 {
+	if (bit < 0 || bit > OddityFlags::SIZE)
+	{
+		return;
+	}
+
 	uint32_t base = 1;
 	m_data ^= base << bit;
+}
+
+bool Oddities::hasAnyOddity() const
+{
+	return (m_data != 0);
 }
 
 bool Oddities::hasOddity(int bit) const
 {
 	uint32_t base = 1;
 	return (bool)((m_data >> bit) & base);
+}
+
+std::string Oddities::oddityName(int flag)
+{
+	return m_oddityNames[flag];
 }
 
 /*---------------------------------------------------------------------------

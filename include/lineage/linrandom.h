@@ -53,6 +53,11 @@ public:
 	 * @return a random number within the bounds set for an attribute
 	 */
 	int getAttrVal();
+	/**
+	 * @brief generates a random number for creating an oddity
+	 * @return a random number within the bounds set for an oddity
+	 */
+	int getOddityVal();
 
 private:
 	/**
