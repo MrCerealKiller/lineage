@@ -19,11 +19,21 @@ Character::Character()
 	m_id = 0;
 	m_name = "Timothy";
 
-	m_attributes = {3, 5, 3, 9, 7, 4, 8, 6, 4};
-	m_buffs 	 = {2, 2, 2, 0, 0, 1, 0, 1, 0};
-	m_debuffs 	 = {0, 0, 0, 1, 0, 0, 1, 0, 0};
-
-	m_personality = { 4, 8, 2, 3 };
+	m_attributes =
+	{
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal(),
+		LinRandom::getInstance()->getAttrVal()
+	};
+	
+	m_buffs 	= {0, 0, 0, 0, 0, 0, 0, 0, 0};
+	m_debuffs 	= {0, 0, 0, 0, 0, 0, 0, 0, 0};
 }
 
 Character::Character(const Character &ccp)
@@ -54,39 +64,6 @@ std::vector<int> Character::evalAttributes() const
 	}
 
 	return attrs;
-}
-
-void Character::printStats() const
-{
-	std::vector<int> attrs = this->evalAttributes();
-
-	std::cout << std::endl
-			  << "\tName: " << m_name << std::endl
-			  << "\t================================" << std::endl
-			  << "\tAttributes" << std::endl
-			  << "\t--------------------------------" << std::endl
-			  << "\t ->  Strength\t\t| "
-			  << attrs.at(Attributes::STRENGTH) << std::endl
-			  << "\t ->  Vitality\t\t| "
-			  << attrs.at(Attributes::VITALITY) << std::endl
-			  << "\t ->  Resiliance\t\t| "
-			  << attrs.at(Attributes::RESILIANCE) << std::endl
-			  << "\t ->  Dexterity\t\t| "
-			  << attrs.at(Attributes::DEXTERITY) << std::endl
-			  << "\t ->  Intelligence\t| "
-			  << attrs.at(Attributes::INTELLIGENCE) << std::endl
-			  << "\t ->  Charisma\t\t| "
-			  << attrs.at(Attributes::CHARISMA) << std::endl
-			  << "\t ->  Perception\t\t| "
-			  << attrs.at(Attributes::PERCEPTION) << std::endl
-			  << "\t ->  Sanity\t\t| "
-			  << attrs.at(Attributes::SANITY) << std::endl
-			  << "\t ->  Fate\t\t| "
-			  << attrs.at(Attributes::FATE) << std::endl
-  			  << "\t================================" << std::endl
-			  << "\tPersonality" << std::endl
-			  << "\t--------------------------------" << std::endl
-			  << std::endl;
 }
 
 /*---------------------------------------------------------------------------
@@ -139,12 +116,72 @@ const std::vector<int>& Character::debuffs() const
 	return m_debuffs;
 }
 
-void Character::setPersonality(const std::vector<int>& personality)
+void Character::setEmpathy(const Empathy& empathy)
 {
-	m_personality = personality;
+	m_empathy = empathy;
 }
 
-const std::vector<int>& Character::personality() const
+const Empathy& Character::empathy() const
 {
-	return m_personality;
+	return m_empathy;
+}
+
+void Character::setVirtue(const Virtue& virtue)
+{
+	m_virtue = virtue;
+}
+
+const Virtue& Character::virtue() const
+{
+	return m_virtue;
+}
+
+void Character::setCaution(const Caution& caution)
+{
+	m_caution = caution;
+}
+
+const Caution& Character::caution() const
+{
+	return m_caution;
+}
+
+void Character::setHonesty(const Honesty& honesty)
+{
+	m_honesty = honesty;
+}
+
+const Honesty& Character::honesty() const
+{
+	return m_honesty;
+}
+
+void Character::setGreed(const Greed& greed)
+{
+	m_greed = greed;
+}
+
+const Greed& Character::greed() const
+{
+	return m_greed;
+}
+
+void Character::setPiety(const Piety& piety)
+{
+	m_piety = piety;
+}
+
+const Piety& Character::piety() const
+{
+	return m_piety;
+}
+
+void Character::setOddities(const Oddities& oddities)
+{
+	m_oddities = oddities;
+}
+
+const Oddities& Character::oddities() const
+{
+	return m_oddities;
 }

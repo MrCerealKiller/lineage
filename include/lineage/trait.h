@@ -123,14 +123,13 @@ public:
 	{
 		PARANOID,
 		INDECISIVE,
-		OBSESSIVE
+		OBSESSIVE,
+		CLAUSTROPHOBIC,
+		SIZE
 	};
 
-	/**
-	 * @brief sets the entire data property
-	 * @param data 4-bytes of data to respresent character oddities
-	 */
-	void set(uint32_t data);
+	Oddities();
+
 	/**
 	 * @brief data accessor
 	 * @return current data
@@ -143,14 +142,32 @@ public:
 	 */
 	void toggleOddity(int bit);
 	/**
+	 * @brief indicates whether the character has any oddity
+	 * @return true, if the character has any oddity; false otherwise
+	 */
+	bool hasAnyOddity() const;
+	/**
 	 * @brief indicates whether the character has the oddity
 	 * @param bit the bit index to toggle (can cast from OddityFlags)
 	 * @return true, if the character has this trait; false otherwise
 	 */
 	bool hasOddity(int bit) const;
 
+	static std::string oddityName(int flag);
+
 private:
-	uint32_t m_data; ///< Raw data that uses bits to represent oddities
+	uint32_t m_data = 0; ///< Raw data that uses bits to represent oddities
+
+	/**
+	 * Human readable equivalent to the OddityFlags enum
+	 */
+	inline static const std::string m_oddityNames[] =
+	{
+		"Paranoid",
+		"Indecisive",
+		"Obsessive",
+		"Claustrophobic"
+	};
 };
 
 /**

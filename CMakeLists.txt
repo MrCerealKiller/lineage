@@ -28,24 +28,29 @@ include_directories(include/lineage)
 # ADD PROJECT LIBRARIES
 add_library(
 	linrandom
-	src/linrandom.cpp
+	src/lineage/linrandom.cpp
 	)
 
 add_library(
 	trait
-	src/trait.cpp
+	src/lineage/trait.cpp
 	)
 
 add_library(
 	character
-	src/character.cpp
+	src/lineage/character.cpp
+	)
+
+add_library(
+	cli
+	src/lineage/cli.cpp
 	)
 
 # ADD EXECUTABLES
 add_executable(
 	main
-	src/main.cpp
+	src/lineage/main.cpp
 	)
 
 # LINK LIBRARIES
-target_link_libraries(main character trait linrandom)
+target_link_libraries(main cli character trait linrandom)

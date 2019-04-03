@@ -41,6 +41,12 @@ int LinRandom::getTraitVal()
 
 int LinRandom::getAttrVal()
 {
+	Distribution dist(1, 7);
+	return dist(m_generator);
+}
+
+int LinRandom::getOddityVal()
+{
 	Distribution dist(0, 10);
 	return dist(m_generator);
 }
