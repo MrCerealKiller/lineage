@@ -7,9 +7,10 @@
  * @date $Date: 28/03/2019 $
  */
 
-#include <character.h>
-#include <trait.h>
 #include <linrandom.h>
+#include <trait.h>
+#include <character.h>
+#include <cli.h>
 
 /**
  * Game entry-point
@@ -19,6 +20,8 @@
  */
 int main(int argc, char* argv[])
 {
+	CLI cli;
 	Character pc;
-	pc.printStats();
+
+	cli.printStats(pc);
 }

@@ -70,11 +70,6 @@ public:
 	std::vector<int> evalAttributes() const;
 
 	/**
-	 * @brief print character statistics
-	 */
-	void printStats() const;
-
-	/**
 	 * @brief id accessor
 	 * @return current id
 	 */
