@@ -42,6 +42,11 @@ add_library(
 	)
 
 add_library(
+	inventory
+	src/lineage/inventory.cpp
+	)
+
+add_library(
 	cli
 	src/lineage/cli.cpp
 	)
@@ -53,4 +58,4 @@ add_executable(
 	)
 
 # LINK LIBRARIES
-target_link_libraries(main cli character trait linrandom)
+target_link_libraries(main cli inventory character trait linrandom)

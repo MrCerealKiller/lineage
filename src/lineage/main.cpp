@@ -10,6 +10,7 @@
 #include <linrandom.h>
 #include <trait.h>
 #include <character.h>
+#include <inventory.h>
 #include <cli.h>
 
 /**
@@ -23,5 +24,5 @@ int main(int argc, char* argv[])
 	CLI cli;
 	Character pc;
 
-	cli.printStats(pc);
+	//cli.printStats(pc);
 }
