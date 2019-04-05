@@ -192,8 +192,8 @@ public:
 	Oddities& oddities();
 
 	/**
-	 * @brief oddities accessor
-	 * @return current oddities
+	 * @brief inventory accessor
+	 * @return current inventory
 	 */
 	Inventory& inventory();
 
