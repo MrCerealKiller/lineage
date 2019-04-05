@@ -12,9 +12,9 @@
 
 #include <string>
 #include <vector>
-#include <iostream>
 
 #include <trait.h>
+#include <inventory.h>
 
 /**
  * @class Character
@@ -186,30 +186,34 @@ public:
 	const Piety& piety() const;
 
 	/**
-	 * @brief oddities mutator
-	 * @param oddities new oddity
+	 * @brief oddities accessor
+	 * @return current oddities
 	 */
-	void setOddities(const Oddities& oddities);
+	Oddities& oddities();
+
 	/**
 	 * @brief oddities accessor
 	 * @return current oddities
 	 */
-	const Oddities& oddities() const;
+	Inventory& inventory();
 
 private:
 	unsigned int m_id;				///< Unique ID for the character
 	std::string m_name;				///< Player-given name
+
 	std::vector<int> m_attributes;	///< Base attributes (stats)
 	std::vector<int> m_buffs;	  	///< Buffs applied to base attributes
 	std::vector<int> m_debuffs;	  	///< Debuffs applied to base attributes
 
-	Empathy m_empathy;
-	Virtue m_virtue;
-	Caution m_caution;
-	Honesty m_honesty;
-	Greed m_greed;
-	Piety m_piety;
+	Empathy m_empathy;				///< Empathy personality modifier
+	Virtue m_virtue;				///< Virtue personality modifier
+	Caution m_caution;				///< Caution personality modifier
+	Honesty m_honesty;				///< Honesty personality modifier
+	Greed m_greed;					///< Greed personality modifier
+	Piety m_piety;					///< Piety personality modifier
 
-	Oddities m_oddities;
+	Oddities m_oddities;			///< Personality oddities
+
+	Inventory m_inventory;			///< The character's inventory
 };
 #endif //_CHARACTER_H

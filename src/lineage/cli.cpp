@@ -95,3 +95,83 @@ void CLI::printStats(Character& c)
 	}
 	std::cout << "\t================================" << std::endl << std::endl;
 }
+
+void CLI::printInventory(Inventory& inv, bool simpleView)
+{
+	std::cout << std::endl << "\tInventory:" << std::endl;
+	std::cout << "\t================================" << std::endl;
+	if (simpleView)
+	{
+		for (Item* p : inv.pItems())
+		{
+			switch(p->category())
+			{
+				case Item::Category::MISC:
+					std::cout << "\t -> " << p->name() << std::endl;
+					break;
+				case Item::Category::WEAPON:
+					std::cout << "\t !/ " << p->name() << std::endl;
+					break;
+				case Item::Category::CLOTHING:
+					std::cout << "\t {} " << p->name() << std::endl;
+					break;
+				default:
+					std::cout << "\tError: " << p->name() << std::endl;
+			}
+		}
+	}
+	else
+	{
+		for (Item* p : inv.pItems())
+		{
+			std::cout << "\t--------------------------------" << std::endl;
+			switch(p->category())
+			{
+				case Item::Category::MISC:
+					std::cout << "\t -> " << p->name()
+							  << std::endl
+							  << "\t    Weight:\t" << p->weight() << "kg"
+							  << std::endl
+							  << "\t    Value:\t" << p->value() << "G"
+							  << std::endl
+							  << "\t    " << p->description() << std::endl;
+					break;
+				case Item::Category::WEAPON:
+					static_cast<Weapon*>(p);
+					std::cout << "\t !/ " << p->name()
+							  << std::endl
+							  << "\t\tWeight:\t" << p->weight() << "kg"
+							  << std::endl
+							  << "\t\tValue:\t" << p->value() << "G"
+							  << std::endl
+							  
+							  << "\t\tMax Dmg.:\t"
+							  << static_cast<Weapon*>(p)->maxDamage()
+							  << std::endl
+							  << "\t\tMin Dmg.:\t"
+							  << static_cast<Weapon*>(p)->minDamage()
+							  <<std::endl
+							  
+							  << "\t\t" << p->description() << std::endl;
+					break;
+				case Item::Category::CLOTHING:
+					std::cout << "\t {} " << p->name()
+							  << std::endl
+							  << "\t\tWeight:\t" << p->weight() << "kg"
+							  << std::endl
+							  << "\t\tValue:\t" << p->value() << "G"
+							  << std::endl
+							  
+							  << "\t\tDefense:\t"
+							  << static_cast<Clothing*>(p)->defense()
+							  << std::endl
+							  
+							  << "\t\t" << p->description() << std::endl;
+					break;
+				default:
+					std::cout << "\tError: " << p->name() << std::endl;
+			}
+		}
+	}
+	std::cout << "\t================================" << std::endl << std::endl;
+}
