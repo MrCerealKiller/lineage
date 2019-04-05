@@ -176,12 +176,12 @@ const Piety& Character::piety() const
 	return m_piety;
 }
 
-void Character::setOddities(const Oddities& oddities)
-{
-	m_oddities = oddities;
-}
-
-const Oddities& Character::oddities() const
+Oddities& Character::oddities()
 {
 	return m_oddities;
+}
+
+Inventory& Character::inventory()
+{
+	return m_inventory;
 }

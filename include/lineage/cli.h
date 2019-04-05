@@ -13,6 +13,7 @@
 #include <iostream>
 
 #include <character.h>
+#include <inventory.h>
 
 /**
  * @class CLI
@@ -26,5 +27,11 @@ public:
 	 * @param c the character
 	 */
 	void printStats(Character& c);
+
+	/**
+	 * @brief prints the name of inventory items
+	 * @param inv the inventory
+	 */
+	void printInventory(Inventory& inv, bool simpleView);
 };
 #endif //_CLI_H

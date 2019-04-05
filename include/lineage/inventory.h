@@ -12,6 +12,7 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
 
 /**
  * @class Item
@@ -20,6 +21,15 @@
 class Item
 {	
 public:
+	/**
+	 * @brief defines broad category for classifying items (default = MISC)
+	 */
+	enum Category
+	{
+		WEAPON,
+		CLOTHING,
+		MISC
+	};
 	/**
 	 * @brief Expresses the rarity of the item
 	 */
@@ -42,8 +52,8 @@ public:
 	 * @param weight the weight (in "kg") of the item
 	 * @param value the value in (in currency) of the item
 	 */
-	Item(std::string& name,
-		 std::string& description,
+	Item(const std::string& name,
+		 const std::string& description,
 		 int rarity,
 		 float weight,
 		 float value);
@@ -73,6 +83,40 @@ public:
 	 * @return the current value (in currency)
 	 */
 	const float value() const;
+	/**
+	 * @brief category accessor
+	 * @return the current category (see Category enum)
+	 */
+	const int category() const;
+
+	/**
+	 * @brief compares two Item* based on their category
+	 * @param  pI1 first Item*
+	 * @param  pI2 second Item*
+	 * @return true if catergory1 is <= category2 (see Category enum)
+	 */
+	static const bool compCategory(const Item* i1, const Item* i2);
+	/**
+	 * @brief compares two Item* based on their rarity
+	 * @param  pI1 first Item*
+	 * @param  pI2 second Item*
+	 * @return true if rarity1 is >= rarity2; false otherwise;
+	 */
+	static const bool compRarity(const Item* i1, const Item* i2);
+	/**
+	 * @brief compares two Item* based on their weight
+	 * @param  pI1 first Item*
+	 * @param  pI2 second Item*
+	 * @return true if weight1 is >= weight2; false otherwise;
+	 */
+	static const bool compWeight(const Item* i1, const Item* i2);
+	/**
+	 * @brief compares two Item* based on their value
+	 * @param  pI1 first Item*
+	 * @param  pI2 second Item*
+	 * @return true if value1 is >= value2; false otherwise;
+	 */
+	static const bool compValue(const Item* i1, const Item* i2);
 
 protected:
 	std::string m_name;			///< item name
@@ -80,6 +124,7 @@ protected:
 	int m_rarity;				///< rarity (see Rarity enum)
 	float m_weight;				///< weight of the item (in "kg")
 	float m_value;				///< value of the item (in currency)
+	int m_category;				///< category of the item (see Category enum)
 };
 
 /**
@@ -114,19 +159,19 @@ public:
 	/**
 	 * @brief sort the inventory vector by type
 	 */
-	const void sortType() const;
+	void sortCategory();
 	/**
 	 * @brief sort the inventory vector by rarity
 	 */
-	const void sortRarity() const;
+	void sortRarity();
 	/**
 	 * @brief sort the inventory vector by weight
 	 */
-	const void sortWeight() const;
+	void sortWeight();
 	/**
 	 * @brief sort the inventory vector by value
 	 */
-	const void sortValue() const;
+	void sortValue();
 
 	/**
 	 * @brief maxWeight accessor
@@ -174,8 +219,8 @@ public:
 	 * @param maxDamage the max damage the weapon is capable of
 	 * @param minDamage the min damage the weapon is capable of
 	 */
-	Weapon(std::string& name,
-		   std::string& description,
+	Weapon(const std::string& name,
+		   const std::string& description,
 		   int rarity,
 		   float weight,
 		   float value,
@@ -239,8 +284,8 @@ public:
 	 * @param type the type of clothing (see Type enum)
 	 * @param defense the defense rating of the clothing
 	 */
-	Clothing(std::string& name,
-		     std::string& description,
+	Clothing(const std::string& name,
+		     const std::string& description,
 		     int rarity,
 		     float weight,
 		     float value,
@@ -256,7 +301,7 @@ public:
 	 * @brief defense accessor
 	 * @return current defense
 	 */
-	const float maxDamage() const;
+	const float defense() const;
 
 private:
 	int m_type;			///< the type of the clothing (see Type enum)
