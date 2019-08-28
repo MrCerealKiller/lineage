@@ -24,15 +24,20 @@ class Character
 {
 public:
 	/**
+	 * @brief Experience required to trigger a level up
+	 */
+	static const int LEVEL_UP_EXP = 100;
+
+	/**
 	 * @brief Constants in the character class namespace
 	 */
 	enum
 	{
 		NAME_SIZE			= 20,
-		ATTRIBUTES_SIZE 	= 9,
+		ATTRIBUTES_SIZE 	= 10,
 		PERSONALITY_SIZE 	= 4,
 		ATTRIBUTE_MIN		= 0,
-		ATTRIBUTE_MAX		= 10
+		ATTRIBUTE_MAX		= 1000
 	};
 	/**
 	 * @brief Flags denoting indices for the attributes array
@@ -43,17 +48,22 @@ public:
 		VITALITY		= 1,
 		RESILIANCE		= 2,
 		DEXTERITY		= 3,
-		INTELLIGENCE	= 4,
-		CHARISMA		= 5,
-		PERCEPTION		= 6,
-		SANITY			= 7,
-		FATE			= 8
+		WILLPOWER		= 4,
+		INTELLIGENCE	= 5,
+		CHARISMA		= 6,
+		PERCEPTION		= 7,
+		SANITY			= 8,
+		FATE			= 9
 	};
 
 	/**
 	 * @brief Character constructor (random generation)
 	 */
 	Character();
+	/**
+	 * @brief Character constructor (with name and level)
+	 */
+	Character(const std::string& name, const int level);
 	/**
 	 * @brief Character copy constructor
 	 */
@@ -85,6 +95,94 @@ public:
 	 * @return current name
 	 */
 	const std::string& name() const;
+
+	/**
+	 * @brief max hp mutator
+	 * @param hp new max hp
+	 */
+	void setHpMax(const unsigned int hp);
+	/**
+	 * @brief max hp accessor
+	 * @return current max hp
+	 */
+	const unsigned int hpMax() const;
+
+	/**
+	 * @brief hp mutator
+	 * @param hp new hp
+	 */
+	void setHp(const unsigned int hp);
+	/**
+	 * @brief hp accessor
+	 * @return current hp
+	 */
+	const unsigned int hp() const;
+
+	/**
+	 * @brief max mp mutator
+	 * @param mp new max mp
+	 */
+	void setMpMax(const unsigned int mp);
+	/**
+	 * @brief max mp accessor
+	 * @return current max mp
+	 */
+	const unsigned int mpMax() const;
+
+	/**
+	 * @brief mp mutator
+	 * @param mp new mp
+	 */
+	void mp(const unsigned int mp);
+	/**
+	 * @brief mp accessor
+	 * @return current mp
+	 */
+	const unsigned int mp() const;
+
+	/**
+	 * @brief max sanity mutator
+	 * @param sanity new max sanity
+	 */
+	void setSanityMax(const unsigned int sanity);
+	/**
+	 * @brief max sanity accessor
+	 * @return current max sanity
+	 */
+	const unsigned int sanityMax() const;
+
+	/**
+	 * @brief sanity mutator
+	 * @param sanity new sanity
+	 */
+	void setSanity(const unsigned int sanity);
+	/**
+	 * @brief sanity accessor
+	 * @return current sanity
+	 */	
+	const unsigned int sanity() const;
+
+	/**
+	 * @brief level mutator
+	 * @param level new level
+	 */
+	void setLevel(const int level);
+	/**
+	 * @brief level accessor
+	 * @return current level
+	 */	
+	const int level() const;
+
+	/**
+	 * @brief experience mutator
+	 * @param experience new experience
+	 */
+	void setExperience(const int exp);
+	/**
+	 * @brief experience accessor
+	 * @return current experience
+	 */	
+	const int experience() const;
 
 	/**
 	 * @brief attributes mutator
@@ -198,13 +296,27 @@ public:
 	Inventory& inventory();
 
 private:
+	// General
 	unsigned int m_id;				///< Unique ID for the character
 	std::string m_name;				///< Player-given name
 
+	// Status
+	unsigned int m_hpMax;			///< Max hit points
+	unsigned int m_hp;				///< Current hit points
+	unsigned int m_mpMax;			///< Max magic points
+	unsigned int m_mp;				///< Current magic points
+	unsigned int m_sanityMax;		///< Max sanity points
+	unsigned int m_sanity;			///< Current sanity points
+	
+	int m_level;					///< Current pc level
+	int m_experience;				///< Current pc experience
+
+	// Attributes and Modifiers
 	std::vector<int> m_attributes;	///< Base attributes (stats)
 	std::vector<int> m_buffs;	  	///< Buffs applied to base attributes
 	std::vector<int> m_debuffs;	  	///< Debuffs applied to base attributes
 
+	// Personality Modifiers
 	Empathy m_empathy;				///< Empathy personality modifier
 	Virtue m_virtue;				///< Virtue personality modifier
 	Caution m_caution;				///< Caution personality modifier

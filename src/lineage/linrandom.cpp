@@ -33,6 +33,12 @@ void LinRandom::initialize()
 	m_generator.seed(seed);
 }
 
+int LinRandom::getBasePoints()
+{
+	Distribution dist(50, 100);
+	return dist(m_generator);
+}
+
 int LinRandom::getTraitVal()
 {
 	Distribution dist(0, 100);

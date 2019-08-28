@@ -44,6 +44,11 @@ public:
 	void initialize();
 
 	/**
+	 * @brief generates a random number for setting base HP and MP
+	 * @return a random number within the bounds set for initial HP/MP
+	 */
+	int getBasePoints();
+	/**
 	 * @brief generates a random number for creating a trait
 	 * @return a random number within the bounds set for a trait
 	 */

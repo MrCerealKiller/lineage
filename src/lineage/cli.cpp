@@ -15,6 +15,11 @@ void CLI::printStats(Character& c)
 
 	std::cout << std::endl
 			  << "\tName: " << c.name() << std::endl
+			  << "\tLevel " << c.level()
+			  << " (" << c.experience() << "/100)" << std::endl
+			  << "\t--------------------------------" << std::endl
+			  << "\tHP: " << c.hp() << " / " << c.hpMax() << std::endl
+			  << "\tMP: " << c.mp() << " / " << c.mpMax() << std::endl
 			  << "\t================================" << std::endl
 			  << "\tAttributes" << std::endl
 			  << "\t--------------------------------" << std::endl
@@ -26,6 +31,8 @@ void CLI::printStats(Character& c)
 			  << attrs.at(Character::Attributes::RESILIANCE) << std::endl
 			  << "\t ->  Dexterity\t\t| "
 			  << attrs.at(Character::Attributes::DEXTERITY) << std::endl
+			  << "\t ->  Willpower\t\t| "
+			  << attrs.at(Character::Attributes::WILLPOWER) << std::endl
 			  << "\t ->  Intelligence\t| "
 			  << attrs.at(Character::Attributes::INTELLIGENCE) << std::endl
 			  << "\t ->  Charisma\t\t| "

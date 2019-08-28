@@ -14,26 +14,46 @@
  * --------------------------------------------------------------------------
  */
 
-Character::Character()
+Character::Character() : Character::Character("Timothy", 1)
+{
+
+}
+
+Character::Character(const std::string& name, const int level)
 {
 	m_id = 0;
-	m_name = "Timothy";
+	
+	m_name = name;
+	m_level = level;
 
 	m_attributes =
 	{
-		LinRandom::getInstance()->getAttrVal(),
-		LinRandom::getInstance()->getAttrVal(),
-		LinRandom::getInstance()->getAttrVal(),
-		LinRandom::getInstance()->getAttrVal(),
-		LinRandom::getInstance()->getAttrVal(),
-		LinRandom::getInstance()->getAttrVal(),
-		LinRandom::getInstance()->getAttrVal(),
-		LinRandom::getInstance()->getAttrVal(),
-		LinRandom::getInstance()->getAttrVal()
+		m_level * LinRandom::getInstance()->getAttrVal(),
+		m_level * LinRandom::getInstance()->getAttrVal(),
+		m_level * LinRandom::getInstance()->getAttrVal(),
+		m_level * LinRandom::getInstance()->getAttrVal(),
+		m_level * LinRandom::getInstance()->getAttrVal(),
+		m_level * LinRandom::getInstance()->getAttrVal(),
+		m_level * LinRandom::getInstance()->getAttrVal(),
+		m_level * LinRandom::getInstance()->getAttrVal(),
+		m_level * LinRandom::getInstance()->getAttrVal(),
+		m_level * LinRandom::getInstance()->getAttrVal()
 	};
-	
-	m_buffs 	= {0, 0, 0, 0, 0, 0, 0, 0, 0};
-	m_debuffs 	= {0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+	m_buffs   = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	m_debuffs = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+	std::vector<int> attrs = this->evalAttributes();
+
+	m_hpMax = (LinRandom::getInstance()->getBasePoints() +
+			   10 * attrs.at(Attributes::VITALITY) +
+			   1 * attrs.at(Attributes::FATE));
+	m_hp = m_hpMax;
+
+	m_mpMax = (LinRandom::getInstance()->getBasePoints() +
+			   10 * attrs.at(Attributes::INTELLIGENCE) +
+			   1 * attrs.at(Attributes::FATE));
+	m_mp = m_mpMax;	
 }
 
 Character::Character(const Character &ccp)
@@ -84,6 +104,86 @@ void Character::setName(const std::string& name)
 const std::string& Character::name() const
 {
 	return m_name;
+}
+
+void Character::setHpMax(const unsigned int hp)
+{
+	m_hpMax = hp;
+}
+
+const unsigned int Character::hpMax() const
+{
+	return m_hpMax;
+}
+
+void Character::setHp(const unsigned int hp)
+{
+	m_hp = hp;
+}
+
+const unsigned int Character::hp() const
+{
+	return m_hp;
+}
+
+void Character::setMpMax(const unsigned int mp)
+{
+	m_mpMax = mp;
+}
+
+const unsigned int Character::mpMax() const
+{
+	return m_mpMax;
+}
+
+void Character::mp(const unsigned int mp)
+{
+	m_mp = mp;
+}
+
+const unsigned int Character::mp() const
+{
+	return m_mp;
+}
+
+void Character::setSanityMax(const unsigned int sanity)
+{
+	m_sanityMax = sanity;
+}
+
+const unsigned int Character::sanityMax() const
+{
+	return m_sanityMax;
+}
+
+void Character::setSanity(const unsigned int sanity)
+{
+	m_sanity = sanity;
+}
+
+const unsigned int Character::sanity() const
+{
+	return m_sanity;
+}
+
+void Character::setLevel(const int level)
+{
+	m_level = level;
+}
+
+const int Character::level() const
+{
+	return m_level;
+}
+
+void Character::setExperience(const int exp)
+{
+	m_experience = exp;
+}
+
+const int Character::experience() const
+{
+	return m_experience;
 }
 
 void Character::setAttributes(const std::vector<int>& attributes)

@@ -22,7 +22,7 @@
 int main(int argc, char* argv[])
 {
 	CLI cli;
-	Character pc;
+	Character pc("Jeremy", 3);
 
 	Item questItem("Strange Key", "Ornate cast iron skeleton key", (int)Item::Rarity::UNIQUE, 0.10, 50);
 	Item treasItem("Embellished Goblet", "Goblet cased in gold and jewels", (int)Item::Rarity::UNCOMMON, 0.70, 80);
